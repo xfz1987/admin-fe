@@ -1,0 +1,8 @@
+{
+  "name": "admin-fe",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:xfz1987/admin-fe.git",
+  "author": "高梓峰 <gaozifeng001@ke.com>",
+  "license": "MIT"
+}
