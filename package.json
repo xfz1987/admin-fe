@@ -6,6 +6,7 @@
   "author": "",
   "license": "MIT",
   "scripts": {
+    "gift": "node_modules/.bin/webpack-dev-server --config ./build/webpack.agift.js",
     "dev": "node_modules/.bin/webpack-dev-server --config ./build/webpack.development.js --hot",
     "build": "rm -rf ./dist && NODE_ENV=production node_modules/.bin/webpack --config ./build/webpack.production.js",
     "test.api": ""
@@ -34,7 +35,11 @@
   },
   "dependencies": {
     "font-awesome": "^4.7.0",
+    "prop-types": "15.6.0",
+    "rc-pagination": "1.15.1",
     "react": "16.2.0",
-    "react-dom": "16.2.0"
+    "react-dom": "16.2.0",
+    "react-router-dom": "4.2.2",
+    "simditor": "2.3.6"
   }
 }
