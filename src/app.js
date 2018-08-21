@@ -1,15 +1,20 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import Routers from './router'
+import histroy from './history'
 
-import './index.scss'
-import { test } from './test.js'
+window.AppHistory = histroy
 
-test()
+class App extends React.Component {
+  render() {
+    return (
+      <Routers />
+    )
+  }
+}
 
 ReactDOM.render(
-  <div>
-    <p>6666</p>
-  </div>,
+  <App />,
   document.getElementById('app')
 )
 

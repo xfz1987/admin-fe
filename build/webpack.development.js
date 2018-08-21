@@ -6,8 +6,8 @@ const config = require('./webpack.base.js')
 
 const devConfig = {
   output: {
-    path: resolve(__dirname, '../dist'), 
-    // publicPath: './',
+    path: resolve(__dirname, '../dist'),
+    publicPath: '/',
     filename: 'js/[name].js'
   },
   module: {
@@ -59,10 +59,10 @@ const devConfig = {
     contentBase: resolve(__dirname, '../dist'),
     port: 8899,
     watchContentBase: true,
+    historyApiFallback: true,
     open: true,
     hot: true,
     inline: true,
-    historyApiFallback: true,
     overlay: {
       errors: true
     },

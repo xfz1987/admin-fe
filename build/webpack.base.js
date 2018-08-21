@@ -3,14 +3,14 @@ const webpack = require('webpack')
 
 module.exports = {
   entry: {
-    app: [resolve(__dirname, '../src/index.js')]
+    app: [resolve(__dirname, '../src/app.js')]
   },
   resolve: {
     alias : {
-        page        : resolve(__dirname, 'src/page'),
-        component   : resolve(__dirname, 'src/component'),
-        util        : resolve(__dirname, 'src/util'),
-        service     : resolve(__dirname, 'src/service')
+        page        : resolve(__dirname, '../src/page'),
+        component   : resolve(__dirname, '../src/component'),
+        util        : resolve(__dirname, '../src/util'),
+        service     : resolve(__dirname, '../src/service')
     }
   },
   module: {

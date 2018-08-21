@@ -1,0 +1,135 @@
+1.##########中间件（处理action异步）
+react-thunk
+
+
+
+2.使用typeScript插件
+babel-plugin-transform-decorators-legacy
+配置
+"babel": {
+    "presets": [
+      "react-app"
+    ],
+    "plugins": [
+      "transform-decorators-legacy"
+    ]
+  },
+
+
+
+3。入口文件
+import thunk from 'redux-thunk'
+
+import reducer from './reducers/index'
+
+import { Provider } from 'react-redux'
+
+import { createStore, applyMiddleware, compose } from 'redux'
+const store = createStore(reducer, compose(
+    applyMiddleware(thunk)
+));
+<Provider store={store}></Provider >
+
+
+
+4.reducer入口文件
+import { combineReducers } from 'redux';
+import {count} from './count.reducer';
+import {user} from './user.reducer';
+const reducer = combineReducers({
+    count,
+    user
+})
+export default reducer;
+
+
+
+5.reducers/actions/type配置
+const GET_USER = 'GET_USER';
+const CHANGE_USER = 'CHANGE_USER';
+const initState = {
+    user: 'lee',
+    pwd: 123456
+}
+export function user(state = initState, action) {
+    switch (action.type) {
+        case GET_USER:
+            console.log(state);
+            return state
+        case CHANGE_USER:
+            return { ...state, user: action.user.user, pwd: action.user.pwd };
+        default:
+            return state;
+    }
+}
+export function getUser(state) {
+    return dispatch => {
+        setTimeout(() => {
+            console.log(123)
+            dispatch({ type: GET_USER })
+        }, 500)
+    }
+}
+export function changeUser(user) {
+    return {
+        type: CHANGE_USER,
+        user: user
+    }
+}
+
+
+
+
+6.jsx文件引用
+import React, { Component } from 'react'
+import { connect } from 'react-redux';
+import { Button, WhiteSpace, WingBlank, List } from 'antd-mobile';
+import { addGun, removeGun, waitAddGun } from '../../reducers/count.reducer'
+import { changeUser,getUser } from '../../reducers/user.reducer'
+
+@connect(
+    state => ({ count: state.count, user: state.user }),
+    { addGun, removeGun, waitAddGun, changeUser, getUser }
+)
+class Auth extends Component {
+    render() {
+        const ListItem = List.Item;
+        return (
+            <WingBlank>
+                <ListItem>{this.props.count}</ListItem>
+                <ListItem>{this.props.user.user}</ListItem>
+                <ListItem>{this.props.user.pwd}</ListItem>
+                <WhiteSpace></WhiteSpace>
+                <Button type="primary" onClick={this.props.addGun}>添加</Button>
+                <WhiteSpace></WhiteSpace>
+                <Button type="primary" onClick={this.props.removeGun}>减少</Button>
+                <WhiteSpace></WhiteSpace>
+                <Button type="primary" onClick={this.props.waitAddGun}>延迟几秒</Button>
+                <WhiteSpace></WhiteSpace>
+                <Button type="primary" onClick={this.props.getUser}>获取用户信息</Button>
+                <WhiteSpace></WhiteSpace>
+                <Button type="primary" onClick={this.handleClick.bind(this)}>改变用户信息</Button>
+            </WingBlank>
+        )
+    }
+    handleClick(){
+        this.props.changeUser({user:'12',pwd:123})
+    }
+}
+
+export default Auth
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
